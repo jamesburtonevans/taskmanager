@@ -1,0 +1,7 @@
+Hey dummy, use this to remember things that I just know you are going to forget, dummy!
+
+## Need to run your application? Your cute little dumb brain can't run a fkn app? Ugh, do this:
+    flask --app .\backend\flaskr run --debug
+    
+## Need to reset the database? Let's initialize that thing:
+    flask --app .\backend\flaskr init-db
