@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit a Task</title>
+</head>
+<body>
+    <h1>Edit {{ task['title'] }}</h1>
+        <form method="post" action="{{ url_for('tasks.update', id=task['id']) }}">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" value="{{ task['title'] }}" required><br><br>
+            
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50">{{ task['description'] }}</textarea><br><br>
+            
+            <label for="due_date">Due Date:</label><br>
+            <input type="date" id="due_date" name="due_date" value="{{ task['due_date'] }}"><br><br>
+            
+            <label for="status">Status:</label><br>
+            <select id="status" name="status">
+                <option value="incomplete" {% if task['status'] == 'incomplete' %}selected{% endif %}>Incomplete</option>
+                <option value="completed" {% if task['status'] == 'completed' %}selected{% endif %}>Completed</option>
+            </select><br><br>
+            
+            <input type="submit" value="Update Task">
+        </form>
+</body>
+</html>

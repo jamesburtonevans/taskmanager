@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete a Task</title>
+</head>
+<body>
+    <h1>Delete {{ task['title'] }}</h1>
+    <form method="post" action="{{ url_for('tasks.delete', id=task['id']) }}">
+        <label for="delete">Are you sure you want to delete "{{ task['title'] }}"?</label><br>
+        <input type="submit" value="Delete Task">
+    </form>
+</body>
+</html>
+
