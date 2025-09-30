@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a New Task</title>
+</head>
+<body>
+    <h1>Create a New Task</h1>
+    <form method="post" action="{{ url_for('tasks.create') }}">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br><br>
+
+        <label for="due_date">Due Date:</label><br>
+        <input type="date" id="due_date" name="due_date"><br><br>
+
+        <input type="submit" value="Create Task">
+    </form>
+</body>
+</html>
