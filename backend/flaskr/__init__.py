@@ -1,11 +1,15 @@
 import os
-
-from flask import Flask
-
+from flask import Flask, send_from_directory, jsonify
+from flask_cors import CORS
 
 def create_app(test_config=None):
-    # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(
+        __name__, 
+        instance_relative_config=True,
+        static_folder='../frontend/dist', 
+        static_url_path='/'
+    )
+    
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
@@ -24,11 +28,18 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from .tasks import routes as tasks_routes
-    app.register_blueprint(tasks_routes.bp)
+    # Register your API blueprint
+    from .api_routes import routes as api_routes
+    app.register_blueprint(api_routes.bp) 
+
+    CORS(app)
 
     from . import db
     db.init_app(app)
 
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def serve_vue_app(path):
+        return send_from_directory(app.static_folder, 'index.html')
 
     return app

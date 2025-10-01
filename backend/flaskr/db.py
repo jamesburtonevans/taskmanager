@@ -46,9 +46,9 @@ def create_task(title, description, due_date=None):
 def get_tasks():
     db = get_db()
     tasks = db.execute(
-        "SELECT * FROM tasks"
+         "SELECT id, title, description, created_at, due_date, status FROM tasks ORDER BY created_at DESC"
     ).fetchall()
-    return tasks
+    return [dict(task) for task in tasks]
 
 def get_task_by_id(task_id):
     db = get_db()
